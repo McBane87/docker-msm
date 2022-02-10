@@ -21,15 +21,20 @@ docker create \
 docker start msm
 ```
 
-4. Crate new user and/or give root user a password
+4. (Optional) Create new user and/or give root user a password
 ```
 docker exec msm useradd someUser 
 docker exec msm usermod -aG wheel someUser #only if sudo is needed
-docker exec msm passwd someUser
-
-# OR
-
-docker exec msm passwd root
+docker exec -it msm passwd someUser
 ```
 
-5. Connect to Desktop, with credentials from above, using RDP on Port 33890
+5. (Mandatory) Give root user a password
+```
+docker exec -it msm passwd root
+```
+
+6. Connect to Desktop, with credentials from above (root or other user), using RDP on Port 33890
+7. Find MSM Software in Start Menu (Applications > System > MegaRAID Storage Manager StartUpUI)
+8. In the upcoming login prompt:
+    * For "Full Access", you need to input the credentials of your root user
+    * For "View Only", you can just enter the credentials of your current user
